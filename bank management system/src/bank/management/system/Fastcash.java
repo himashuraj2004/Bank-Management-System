@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.util.Date;
 public class Fastcash extends JFrame implements ActionListener{
     JButton deposit, withdrawl, miniStatement, pinchange, fastCash, balance, exit; 
     String pinnumber;
@@ -93,7 +94,11 @@ public class Fastcash extends JFrame implements ActionListener{
                 }
                 
                 Date date = new Date();
-                String query = "insert into bank values('"+pinnumber+"', '"+date+"','"+)"
+                String query = "insert into bank values('"+pinnumber+"', '"+date+"','Withdrawl', '"+amount+"')";
+                c.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Rs "+ amount +" debited successfully");
+                setVisible(false);
+                new Transactions(pinnumber).setVisible(true);
             }catch(Exception e){
                 System.out.println(e);
             }
